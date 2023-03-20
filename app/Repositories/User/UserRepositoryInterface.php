@@ -14,5 +14,5 @@ interface UserRepositoryInterface
 
     public function find($id);
 
-    public function login($mail, $password);
+    public function login(array $credentials, $remember_me);
 }

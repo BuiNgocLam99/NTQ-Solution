@@ -2,10 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class Admin extends Model
+class Admin extends Model implements Authenticatable
 {
-    use HasFactory;
+    use \Illuminate\Auth\Authenticatable;
+
+    protected $fillable = [
+        'slug',
+        'fullname',
+        'position',
+        'email',
+        'phone_number',
+        'avatar',
+        'password',
+        'dob',
+    ];
 }

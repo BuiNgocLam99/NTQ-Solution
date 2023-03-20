@@ -3,6 +3,7 @@
 namespace App\Repositories\User;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -38,11 +39,16 @@ class UserRepository implements UserRepositoryInterface
         return $this->model->find($id);
     }
 
-    public function login($email, $password)
+    public function login(array $credentials, $remember_me)
     {
-        // if (User::guard('')->attempt(['email' => $email, 'password' => $password])) {
-        //     return true;
-        // }
-        return false;
+        if (Auth::guard('users')->attempt($credentials, $remember_me)) {
+            return response()->json(['success_message' => 'User']);
+        }
+
+        if (Auth::guard('admins')->attempt($credentials, $remember_me)) {
+            return response()->json(['success_message' => 'Admin']);
+        }
+
+        return response()->json(['error_message' => 'No']);
     }
 }
