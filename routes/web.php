@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('sign-up', [SignUpController::class, 'index'])->name('auth.sign-up');
+Route::post('sign-up', [SignUpController::class, 'create'])->name('auth.post-sign-up');
