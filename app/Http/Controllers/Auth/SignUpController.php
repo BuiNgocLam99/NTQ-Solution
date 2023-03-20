@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserFormRequest;
+use App\Http\Requests\Auth\SignUpFormRequest;
 use App\Services\UserService;
 
 class SignUpController extends Controller
@@ -20,7 +20,7 @@ class SignUpController extends Controller
         return view('auth.signUp');
     }
 
-    public function create(UserFormRequest $request)
+    public function create(SignUpFormRequest $request)
     {
         $validatedData = $request->all();
         $result = $this->userService->create($validatedData);

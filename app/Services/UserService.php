@@ -25,7 +25,20 @@ class UserService
         }
 
         $attributes['slug'] = $slug;
-        
+        $attributes['password'] = bcrypt($attributes['password']);
+
         return $this->userRepository->create($attributes);
+    }
+
+    public function login(array $attributes)
+    {
+        $credentials = [
+            'email' => $attributes['email'],
+            'password' => $attributes['password'],
+        ];
+
+        $remember_me = $attributes['remember_me'] ?? false;
+
+        return $this->userRepository->login($credentials, $remember_me);
     }
 }
