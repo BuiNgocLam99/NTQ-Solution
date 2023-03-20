@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Sign Up | NTQ-Solution
+Sign In | NTQ-Solution
 @endsection
 
 @section('content')
@@ -11,7 +11,6 @@ Sign Up | NTQ-Solution
     </div>
 </div>
 <div class="auth-page-wrapper pt-5">
-
     <!-- auth page content -->
     <div class="auth-page-content">
         <div class="container">
@@ -35,55 +34,48 @@ Sign Up | NTQ-Solution
 
                         <div class="card-body p-4">
                             <div class="text-center mt-2">
-                                <h5 class="text-primary">Create New Account</h5>
-                                <p class="text-muted">Get your free velzon account now</p>
-                                <div id="message"></div>
+                                <h5 class="text-primary">Welcome Back !</h5>
+                                <p class="text-muted">Sign in to continue to Velzon.</p>
                             </div>
                             <div class="p-2 mt-4">
-                                <form id="myForm" method="POST">
+                                <form id="myForm">
                                     @csrf
-
+                                    
                                     <div class="mb-3">
-                                        <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address" required>
+                                        <div id="message"></div>                                    
+                                    </div>  
+                                    
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="text" class="form-control" name="email" id="email" placeholder="Enter email">
                                         <span id="email_error" class="text-danger"></span>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="username" name="user_name" placeholder="Enter username" required>
-                                        <span id="user_name_error" class="text-danger"></span>
-                                    </div>
 
                                     <div class="mb-3">
+                                        <div class="float-end">
+                                            {{-- <a href="{{ route('user.forgot-password') }}" class="text-muted">Forgot password?</a> --}}
+                                        </div>
                                         <label class="form-label" for="password-input">Password</label>
-                                        <div class="position-relative auth-pass-inputgroup">
-                                            <input type="password" name="password" class="form-control pe-5 password-input" onpaste="return false" placeholder="Enter password" id="password-input" aria-describedby="passwordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                        <div class="position-relative auth-pass-inputgroup mb-3">
+                                            <input type="password" class="form-control pe-5 password-input" name="password" placeholder="Enter password" id="password-input">
                                             <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                             <span id="password_error" class="text-danger"></span>
                                         </div>
                                     </div>
 
-                                    <div class="mb-4">
-                                        <p class="mb-0 fs-12 text-muted fst-italic">By registering you agree to the Velzon <a href="#" class="text-primary text-decoration-underline fst-normal fw-medium">Terms of Use</a></p>
-                                    </div>
-
-                                    <div id="password-contain" class="p-3 bg-light mb-2 rounded">
-                                        <h5 class="fs-13">Password must contain:</h5>
-                                        <p id="pass-length" class="invalid fs-12 mb-2">Minimum <b>8 characters</b></p>
-                                        <p id="pass-lower" class="invalid fs-12 mb-2">At <b>lowercase</b> letter (a-z)</p>
-                                        <p id="pass-upper" class="invalid fs-12 mb-2">At least <b>uppercase</b> letter (A-Z)</p>
-                                        <p id="pass-number" class="invalid fs-12 mb-0">A least <b>number</b> (0-9)</p>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="remember_me" id="auth-remember-check">
+                                        <label class="form-check-label" for="auth-remember-check">Remember me</label>
                                     </div>
 
                                     <div class="mt-4">
-                                        <button class="btn btn-success w-100" type="submit">Sign Up</button>
+                                        <button class="btn btn-primary w-100" type="submit">Sign In</button>
                                     </div>
 
                                     <div class="mt-4 text-center">
                                         <div class="signin-other-title">
-                                            <h5 class="fs-13 mb-4 title text-muted">Create account with</h5>
+                                            <h5 class="fs-13 mb-4 title">Sign In with</h5>
                                         </div>
-
                                         <div>
                                             <a href="https://www.facebook.com/" target="_blank" class="btn btn-primary btn-icon waves-effect waves-light"><i class="ri-facebook-fill fs-16"></i></a>
                                             <a href="https://www.google.com/" target="_blank" class="btn btn-danger btn-icon waves-effect waves-light"><i class="ri-google-fill fs-16"></i></a>
@@ -92,7 +84,6 @@ Sign Up | NTQ-Solution
                                         </div>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                         <!-- end card body -->
@@ -100,7 +91,7 @@ Sign Up | NTQ-Solution
                     <!-- end card -->
 
                     <div class="mt-4 text-center">
-                        <p class="mb-0">Already have an account ? <a href="{{ route('auth.post-sign-in') }}" class="fw-semibold text-primary text-decoration-underline"> Signin </a> </p>
+                        <p class="mb-0">Don't have an account ? <a href="{{ route('auth.post-sign-up') }}" class="fw-semibold text-primary text-decoration-underline"> Signup </a> </p>
                     </div>
 
                 </div>
@@ -127,37 +118,36 @@ Sign Up | NTQ-Solution
     </footer>
     <!-- end Footer -->
 </div>
-
 <script>
     $(document).ready(function(){
-        
         $(".spinner-container").hide();
 
         $('#myForm').submit(function(e){
+
             e.preventDefault();
 
             $(".spinner-container").show();
 
             var formData = new FormData(this);
 
-            $('span[id*="_error"]').text("");
+            $('span[id*="_error"]').text('');
 
             $.ajax({
-                url: "{{ route('auth.post-sign-up') }}",
+                url: "{{ route('auth.post-sign-in') }}",
                 type: 'POST',
                 data: formData,
                 contentType: false,
                 processData: false,
-                beforeSend: function() {
-                    $('.spinner').show();
-                },
                 success: function(response){
-                    $('#message').addClass('text-success').text(response.success_message);
-                    $("input").val("");
+                    console.log(response);
+                    // if(response.error_message){
+                    //     return $('#error_message').text(response.error_message);
+                    // }
+                    // window.location.assign(response.url);
                 },
                 error: function(reject){
                     var response = $.parseJSON(reject.responseText);
-                    $('span[id*="_error"]').text("");
+                    $('span[id*="_error"]').text('')
                     $.each(response.errors, function(key, val){
                         $("#" + key + "_error").text(val[0]);
                     })
@@ -172,12 +162,10 @@ Sign Up | NTQ-Solution
 @endsection
 
 @push('scripts')
-    <!-- particles js -->
-    <script src="assets/libs/particles.js/particles.js"></script>
-    <!-- particles app js -->
-    <script src="assets/js/pages/particles.app.js"></script>
-    <!-- validation init -->
-    <script src="assets/js/pages/form-validation.init.js"></script>
-    <!-- password create init -->
-    <script src="assets/js/pages/passowrd-create.init.js"></script>
+     <!-- particles js -->
+     <script src="assets/libs/particles.js/particles.js"></script>
+     <!-- particles app js -->
+     <script src="assets/js/pages/particles.app.js"></script>
+     <!-- password-addon init -->
+     <script src="assets/js/pages/password-addon.init.js"></script>
 @endpush
