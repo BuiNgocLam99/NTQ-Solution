@@ -139,11 +139,11 @@ Sign In | NTQ-Solution
                 contentType: false,
                 processData: false,
                 success: function(response){
-                    console.log(response);
-                    // if(response.error_message){
-                    //     return $('#error_message').text(response.error_message);
-                    // }
-                    // window.location.assign(response.url);
+                    if(response.error_message){
+                        return $('#message').addClass('text-danger').text(response.error_message);
+                    }else{
+                        window.location.assign(response.url);
+                    }
                 },
                 error: function(reject){
                     var response = $.parseJSON(reject.responseText);
