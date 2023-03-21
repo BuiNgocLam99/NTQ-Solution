@@ -13,4 +13,6 @@ interface UserRepositoryInterface
     public function delete($id);
 
     public function find($id);
+
+    public function findByEmail($email);
 }

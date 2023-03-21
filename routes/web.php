@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\SignInController;
 use App\Http\Controllers\Auth\SignUpController;
 use App\Http\Controllers\User\ProductController;
@@ -23,4 +24,9 @@ Route::post('sign-up', [SignUpController::class, 'create'])->name('auth.post-sig
 Route::get('sign-in', [SignInController::class, 'index'])->name('auth.sign-in');
 Route::post('sign-in', [SignInController::class, 'login'])->name('auth.post-sign-in');
 
+Route::get('forgot-password', [ForgotPasswordController::class, 'index'])->name('auth.forgot-password');
+Route::post('forgot-password', [ForgotPasswordController::class, 'forgotPassword'])->name('auth.post-forgot-password');
+
 Route::get('', [ProductController::class, 'index'])->name('user.products');
+
+

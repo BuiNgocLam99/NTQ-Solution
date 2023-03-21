@@ -157,7 +157,6 @@ Sign Up | NTQ-Solution
                 },
                 error: function(reject){
                     var response = $.parseJSON(reject.responseText);
-                    $('span[id*="_error"]').text("");
                     $.each(response.errors, function(key, val){
                         $("#" + key + "_error").text(val[0]);
                     })

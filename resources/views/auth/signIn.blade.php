@@ -53,7 +53,7 @@ Sign In | NTQ-Solution
 
                                     <div class="mb-3">
                                         <div class="float-end">
-                                            {{-- <a href="{{ route('user.forgot-password') }}" class="text-muted">Forgot password?</a> --}}
+                                            <a href="{{ route('auth.forgot-password') }}" class="text-muted">Forgot password?</a>
                                         </div>
                                         <label class="form-label" for="password-input">Password</label>
                                         <div class="position-relative auth-pass-inputgroup mb-3">
@@ -147,7 +147,6 @@ Sign In | NTQ-Solution
                 },
                 error: function(reject){
                     var response = $.parseJSON(reject.responseText);
-                    $('span[id*="_error"]').text('')
                     $.each(response.errors, function(key, val){
                         $("#" + key + "_error").text(val[0]);
                     })
