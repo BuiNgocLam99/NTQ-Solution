@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Auth\SignInController;
 use App\Http\Controllers\Auth\SignUpController;
+use App\Http\Controllers\User\ProductController;
+use App\Http\Controllers\User\Products;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +22,5 @@ Route::post('sign-up', [SignUpController::class, 'create'])->name('auth.post-sig
 
 Route::get('sign-in', [SignInController::class, 'index'])->name('auth.sign-in');
 Route::post('sign-in', [SignInController::class, 'login'])->name('auth.post-sign-in');
+
+Route::get('', [ProductController::class, 'index'])->name('user.products');
