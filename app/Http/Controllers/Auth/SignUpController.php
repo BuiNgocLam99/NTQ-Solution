@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\SignUpFormRequest;
-use App\Services\UserService;
+use App\Services\User\UserService;
 
 class SignUpController extends Controller
 {

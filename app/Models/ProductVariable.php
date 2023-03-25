@@ -7,5 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductVariable extends Model
 {
-    use HasFactory;
+    protected $table = 'product_variables';
+
+    protected $fillable = [
+        'product_code',
+        'product_id',
+        'import_price',
+        'regular_price',
+        'sale_price',
+        'tax',
+        'order_counts',
+    ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

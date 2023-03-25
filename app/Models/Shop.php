@@ -7,5 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Shop extends Model
 {
-    use HasFactory;
+    protected $table = 'shops';
+
+    protected $fillable = [
+        'name',
+        'slug',
+        'email',
+        'phone_number',
+        'avatar',
+        'description',
+        'password',
+        'zipcode',
+        'city',
+        'country',
+    ];
+
+    public function product() {
+        return $this->hasMany(Product::class);
+    }
 }

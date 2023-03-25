@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title')->unique();
             $table->string('slug')->unique();
-            $table->string('description');
-            $table->string('thumnail');
-            $table->integer('product_counts');
+            $table->string('description')->string();
+            $table->string('thumnail')->nullable();
+            $table->integer('product_counts')->default(0);
             $table->timestamps();
         });
     }

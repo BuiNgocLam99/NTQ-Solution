@@ -17,13 +17,13 @@ return new class extends Migration
             $table->string('code_product')->unique();
             $table->string('title');
             $table->string('thumnail');
-            $table->string('images');
+            $table->string('images')->nullable();
             $table->enum('status', [0, 1])->comment('1 is active, 0 is block');
             $table->integer('total_orders')->default(0);
             $table->integer('view_counts')->default(0);
             $table->integer('total_stocks')->default(0);
             $table->float('avg_rating')->default(0);
-            $table->string('reference_product');
+            $table->string('reference_product')->nullable();
             // $table->string('tags')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
