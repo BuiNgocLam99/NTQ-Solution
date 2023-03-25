@@ -6,47 +6,45 @@ use App\Models\Product;
 
 class ProductRepository implements ProductRepositoryInterface
 {
-    protected $product;
+    protected $model;
 
-    public function __construct(Product $product)
+    public function __construct(Product $model)
     {
-        $this->product = $product;
+        $this->model = $model;
     }
 
     public function all()
     {
-        $products = $this->product->paginate(10);
-        foreach ($products as $product) {
-            $product['gallery_images'] = json_decode($product['gallery_images']);
-        }
-        return $products;
+        return $this->model->get();
     }
 
     public function create(array $data)
     {
-        return $this->product->create($data);
+        return $this->model->create($data);
     }
 
     public function update(array $data, $id)
     {
-        return $this->product->find($id)->update($data);
+        return $this->model->find($id)->update($data);
     }
 
     public function delete($id)
     {
-        return $this->product->find($id)->delete();
+        return $this->model->find($id)->delete();
     }
 
     public function find($id)
     {
-        return $this->product->find($id);
+        return $this->model->find($id);
     }
 
-    public function removeMainImage($id)
+    public function findSlug($slug)
     {
-        $product = $this->find($id);
-        $product->main_image = 'hehe';
-        $product->save();
-        return $this->product->find($id);
+        return $this->model->where('slug', $slug)->first();
+    }
+
+    public function findProductCode($code)
+    {
+        return $this->model->where('code_product', $code)->first();
     }
 }

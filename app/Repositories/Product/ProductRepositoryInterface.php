@@ -14,5 +14,8 @@ interface ProductRepositoryInterface
 
     public function find($id);
     
-    public function removeMainImage($id);
+    public function findSlug($slug);
+
+    public function findProductCode($code);
+
 }

@@ -42,7 +42,11 @@ Sign In | NTQ-Solution
                                     @csrf
                                     
                                     <div class="mb-3">
-                                        <div id="message"></div>                                    
+                                        <div id="message"></div>      
+                                        
+                                        @if (Session::has('error_message'))
+                                            <div class="alert alert-danger" role="alert">{{ Session::get('error_message') }}</div>
+                                        @endif
                                     </div>  
                                     
                                     <div class="mb-3">

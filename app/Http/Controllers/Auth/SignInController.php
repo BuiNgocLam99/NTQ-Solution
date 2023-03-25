@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\SignInFormRequest;
-use App\Services\UserService;
+use App\Services\User\UserService;
 use Illuminate\Support\Facades\Auth;
 
 class SignInController extends Controller
@@ -22,11 +22,11 @@ class SignInController extends Controller
     }
 
     public function login(SignInFormRequest $request)
-    {   
+    {
         $credentials = [
             'email' => $request->email,
             'password' => $request->password,
-        ]; 
+        ];
 
         $remember_me = $request->remember_me ?? false;
 
@@ -36,9 +36,15 @@ class SignInController extends Controller
         }
 
         if (Auth::guard('admins')->attempt($credentials, $remember_me)) {
-            return response()->json(['success_message' => 'Admin']);
+            $url = $request->session()->get('url.intended', url(route('admin.products')));
+            return response()->json(['url' => $url]);
         }
 
         return response()->json(['error_message' => 'Your account is not existed in our records']);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
     }
 }

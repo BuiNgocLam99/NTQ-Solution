@@ -5,11 +5,11 @@ Products | NTQ-Solution
 @endsection
 
 @push('styles')
-<!-- nouisliderribute css -->
-<link rel="stylesheet" href="assets/libs/nouislider/nouislider.min.css">
+    <!-- nouisliderribute css -->
+    <link rel="stylesheet" href="assets/libs/nouislider/nouislider.min.css">
 
-<!-- gridjs css -->
-<link rel="stylesheet" href="assets/libs/gridjs/theme/mermaid.min.css">
+    <!-- gridjs css -->
+    <link rel="stylesheet" href="assets/libs/gridjs/theme/mermaid.min.css">
 @endpush
 
 @section('content')

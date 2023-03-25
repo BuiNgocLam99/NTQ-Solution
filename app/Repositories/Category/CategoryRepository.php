@@ -3,8 +3,6 @@
 namespace App\Repositories\Category;
 
 use App\Models\Category;
-use App\Repositories\Category\CategoryRepositoryInterface;
-
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
@@ -17,7 +15,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     public function all()
     {
-        return $this->model->orderBy('created_at', 'desc')->paginate(10);
+        return $this->model->get();
     }
 
     public function create(array $attributes)
